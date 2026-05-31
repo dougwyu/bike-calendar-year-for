@@ -5,8 +5,12 @@ import { calendarDefaults } from '../dom/protocols'
 
 export async function activate(context: AppExtensionContext) {
   // Register the same defaults as the core Calendar so the copied
-  // calendar-rows.ts resolves matching date formats and level flags.
-  bike.defaults.registerDefaults(calendarDefaults)
+  // calendar-rows.ts resolves matching date formats and level flags,
+  // but override the day format to "Sun 31 May".
+  bike.defaults.registerDefaults({
+    ...calendarDefaults,
+    dayNameFormat: '{"weekday":"short","month":"short","day":"numeric"}',
+  })
 
   bike.commands.addCommands({
     commands: {
