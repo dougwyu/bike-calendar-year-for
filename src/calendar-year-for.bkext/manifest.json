@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/@bike-outliner/extension-kit/schemas/manifest.schema.json",
+  "description": "Adds a calendar:year-for command that prompts for a year and generates that year's calendar.",
+  "version": "0.1.0",
+  "api_version": "0.0.0",
+  "permissions": [],
+  "host_permissions": []
+}
