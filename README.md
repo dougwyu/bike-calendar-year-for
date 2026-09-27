@@ -33,24 +33,25 @@ so nothing breaks — only the visible text of new rows may differ).
 
 ## Install
 
-```bash
-cp -r out/extensions/calendar-year-for.bkext/ \
-  ~/Library/Containers/com.hogbaysoftware.Bike/Data/Library/Application\ Support/Bike/Extensions/calendar-year-for.bkext/
-```
+1. Build it with `npm install && npm run build` (see Development).
+2. Quit Bike.
+3. In Finder, press ⌘⇧G and go to `~/Library/Containers/com.hogbaysoftware.Bike/Data/Library/Application Support/Bike/Extensions/`.
+4. Copy `out/extensions/calendar-year-for.bkext` into that folder, replacing any older copy.
+5. Reopen Bike. Optionally bind a keyboard shortcut to `calendar:year-for` in Bike's keybindings.
 
-Then reload extensions in Bike (or restart it). Optionally bind a keyboard
-shortcut to `calendar:year-for` in Bike's keybindings.
+Use Finder rather than `cp` in a shell: macOS protects Bike's container, and a shell without Full Disk Access gets `Operation not permitted`. Alternatively, `npm test` builds and installs in one step (see below).
 
 ## Development
 
 ```bash
 npm install
-touch node_modules/@bike-outliner/extension-kit/api/core/globals.d.ts  # recreate missing stub
 npm run build
 npm test        # run unit tests (Bike must be closed)
 ```
 
 The build system is [`bike-ext`](https://github.com/bike-outliner/extension-kit).
+
+`npm test` installs the build into Bike's sandboxed container (`~/Library/Containers/com.hogbaysoftware.Bike/...`), which macOS protects. Run it from Terminal with Full Disk Access granted (System Settings > Privacy & Security > Full Disk Access). From any other shell the install fails with `EPERM` and the tests silently run against whatever copy is already installed.
 
 ## Project structure
 
